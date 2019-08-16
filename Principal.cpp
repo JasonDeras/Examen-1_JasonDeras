@@ -59,7 +59,7 @@ vector<Soldados*>equipo2;
 						
 						
 					}//Fin del while que hace la simulacion
-						
+					
 				break;
 				
 				case 3:
@@ -253,3 +253,4 @@ vector<Soldados*>equipo2;
 		leer.close();
 		
 	}//Fin del metodo listar
+	
