@@ -52,9 +52,6 @@ class Soldados{
 			return this->p_fuerza;
 		}//Get de los puntos de fuerza
 		
-		//Metodo abstracto de los ataques
-		virtual void ataque(Soldados*s1,Soldados*s2)=0;
-		
 		~Soldados(){
 			
 		}//Destructor

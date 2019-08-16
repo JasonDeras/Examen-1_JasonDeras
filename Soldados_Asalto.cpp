@@ -43,19 +43,6 @@ class S_Asalto:public Soldados{
 			return f_extra;
 		}//Get de la fuerza extra
 		
-		void ataque(Soldados*s1,Soldados*s2){
-			
-			if(typeid(*s1)==typeid(S_Asalto)
-			  && typeid(*s2)==typeid(S_Asalto)){//Valida si es un soldado de asalto a otro soldado de asalto	
-			  	puntos de fuerza * (10)
-			  	
-			}else if(typeid(*s1)==typeid(S_Asalto)
-			  && typeid(*s2)==typeid(S_Asalto)){//Valida si es de un soldado de asalto a un soldado de soporte
-		puntos de fuerza * (10 + (velocidad * 2))
-			}//Fin de la validacion de los ataques
-			
-		}//Fin del metodo abstracto para el ataque y defesa
-		
 		~S_Asalto(){
 			
 		}//Destructor
