@@ -3,16 +3,15 @@
 #include <string.h>
 #include <vector>
 #include<bits/stdc++.h>
-#include "Solados_Asalto.cpp"
-#include "Solados_Soporte.cpp"
+#include "Soldados_Asalto.cpp"
+#include "Soldados_Soporte.cpp"
 using namespace std;
 
 string token(string, string,int);
-int ataque(Soldaos*s1,Soldados*s2);
-void listar();	
-void eliminar();
-void modificar();
-
+int ataque(Soldados*s1,Soldados*s2);
+void listar();
+vector<string>equipo1;
+vector<string>equipo2;
 	int main(){
 		
 		int r=1;
@@ -33,6 +32,12 @@ void modificar();
 				
 				case 1:
 					listar();
+					cout<<"Equipo 1"<<endl;
+					for(int i=0;i<equipo1.size();i++)
+					{
+						cout<<equipo1.at(i);
+					}
+					
 					cout<<"\n\n\n\n";
 				break;
 				
@@ -91,129 +96,25 @@ void modificar();
 	
 	void listar(){
 		
+		int cont=0;
 		fstream leer;
 		
 		string linea;
 		
-		leer.open("./prueba.txt");
+		leer.open("./Soldados.txt");
 		
 		while(!leer.eof()){
 			
 			getline(leer,linea);
 			
 			if(linea.size()>0){
+				for(int i=0;i<linea.size();i++){
+					cout<<token(linea,"/",i)+" "<<endl;	
+				}
 				
-				cout<<token(linea,";",1)+" "
-					 +token(linea,";",2)+" "
-					 +token(linea,";",3)+" "<<endl;
 			}
 		}
 		
 		leer.close();
 		
 	}//Fin del metodo listar
-	
-	void eliminar(){
-		
-		fstream leer;
-		
-		ofstream escribir;
-		
-		vector<string>lista;
-		
-		string linea;
-		
-		int cent=0;
-		
-		leer.open("./prueba.txt");
-		string codigo;
-		
-		cout<<"codigo a eliminar: ";
-		cin>>codigo;
-		
-		while(!leer.eof()){
-			
-			getline(leer,linea);
-			
-			if(token(linea,";",1)==codigo){
-				
-				cent=1;
-				
-			}else {
-				
-				if(linea[0]!='\0'){
-					lista.push_back(linea);
-				}//No es el fin de archivo (eof)
-				
-			}//Busca el codigo a eliminar
-			
-		}//Fin del while que lee el archivo
-		
-		leer.close();
-		
-		//Sobre escrubir el archivo
-		if(cent==1){
-			escribir.open("./prueba.txt");
-			for(int i=0;i<lista.size();i++){
-				escribir<<lista[i]<<endl;
-			}
-			escribir.close();
-		}
-		
-	}//Fin del metodo eliminar
-	
-	void modificar(){
-		
-		fstream leer;
-		
-		ofstream escribir;
-		
-		vector<string>lista;
-		
-		string linea;
-		
-		int cent=0;
-		
-		leer.open("./prueba.txt");
-		string codigo;
-		
-		cout<<"codigo a modificar: ";
-		cin>>codigo;
-		
-		while(!leer.eof()){
-			
-			getline(leer,linea);
-			
-			if(token(linea,";",1)==codigo){
-				
-				cent=1;
-				string vn,ve;
-				cout<<"Nombre nuevo: ";
-				cin>>vn;
-				cout<<"Edad nueva: ";
-				cin>>ve;
-				lista.push_back(codigo+";"+vn+";"+ve);
-				
-			}else {
-				
-				if(linea[0]!='\0'){
-					lista.push_back(linea);
-				}//No es el fin de archivo (eof)
-				
-			}//Busca el codigo a eliminar
-			
-		}//Fin del while que lee el archivo
-		
-		leer.close();
-		
-		//Sobre escrubir el archivo
-		if(cent==1){
-			
-			escribir.open("./prueba.txt");
-			for(int i=0;i<lista.size();i++){
-				escribir<<lista[i]<<endl;
-			}
-			escribir.close();
-		}
-		
-	}//Fin del metodo modificar
