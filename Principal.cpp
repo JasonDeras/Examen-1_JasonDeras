@@ -10,8 +10,10 @@ using namespace std;
 string token(string, string,int);
 int ataque(Soldados*s1,Soldados*s2);
 void listar();
-vector<string>equipo1;
-vector<string>equipo2;
+vector<Soldados*>equipo1;
+vector<Soldados*>equipo2;
+Soldados *s1,*s2;
+
 	int main(){
 		
 		int r=1;
@@ -31,14 +33,10 @@ vector<string>equipo2;
 				
 				
 				case 1:
-					listar();
-					cout<<"Equipo 1"<<endl;
-					for(int i=0;i<equipo1.size();i++)
-					{
-						cout<<equipo1.at(i);
-					}
 					
+					listar();
 					cout<<"\n\n\n\n";
+					
 				break;
 				
 				case 2:
@@ -61,59 +59,176 @@ vector<string>equipo2;
 		return 0;
 	}//Fin del main
 	
-	string token(string cadena, string divisor, int pos){
-		
-       if(cadena.size()>0){
-       	
-         char oracion[cadena.size()];
-		  
-         for (int i=0;i<=cadena.size();i++){
-               oracion[i]=cadena[i];
-         } 
-		                    
-         char *ptrtoken; 
-         int num=1;
-         const char* d=divisor.c_str();
-         ptrtoken = strtok(oracion , d);   
-		           
-         while(ptrtoken){
-         	
-             if(num==pos){ 
-                return ptrtoken;                    
-             }
-			                  
-             ptrtoken = strtok(NULL, d);
-             num++;
-         }
-         
-         return "";
-         
-       }else{
-             return "";
-       }
-       
-	}//Fin de metodo token
-	
 	void listar(){
 		
-		int cont=0;
-		fstream leer;
+	stringstream convert;
+	ifstream leer("./Soldados.txt");
+	Soldados *s;
+	
+	//Variable de control
+	string nombre="";
+	int p_vida=0;
+	int p_fuerza=0;
+	string tipo=0;
+	
+	//Puntos de vida
+	string vidas="";
+	
+	//Puntos de ataque;
+	string ataque=""; 
+	
+	//Velocidad o blinedaje
+	string v_o="";
+	
+	//Fuerza o camuflaje
+	string f_c="";
+	
+	
+	//Soldados de asalto
+		int velocidad;
+		int f_extra;
 		
-		string linea;
+	//con dos delimitadores
+	while (leer.get() != '&'){
 		
-		leer.open("./Soldados.txt");
-		
-		while(!leer.eof()){
+    	leer.unget();
+    	getline(leer, tipo, '/');
+    	getline(leer, nombre, '/');
+    	getline(leer, vidas, '/'); 
+    	
+    	//Conversion de vidas a entero
+    	convert<<vidas;
+    	convert>>p_vida;
+    	convert.str("");
+    	convert.clear();
+    	
+    	
+    	getline(leer, ataque, '/');
+    	//Conversion de puntos de ataque a entero
+		convert<<ataque;
+    	convert>>p_fuerza;
+    	convert.str("");
+    	convert.clear();
+  	
+    	getline(leer, v_o, '/');
+    	getline(leer, f_c, '/');
+    	
+    	if(tipo=="Asalto"){
+    		
+    		//Velocidad y fuerza extra
+    		int velocidad=0;
+			int f_extra=0;
 			
-			getline(leer,linea);
-			
-			if(linea.size()>0){
-				for(int i=0;i<linea.size();i++){
-					cout<<token(linea,"/",i)+" "<<endl;	
-				}
+			//Velocidad
+			convert<<v_o;
+    		convert>>velocidad;
+    		convert.str("");
+    		convert.clear();
+    	
+    		//Fuerza convert<<ataque;
+    		convert>>f_c;
+    		convert>>f_extra;
+    		convert.str("");
+    		convert.clear();
+    		
+    		//Crea un nuevo soldado de asalto
+    		s=new S_Asalto(velocidad,f_extra,nombre,p_vida,p_fuerza,tipo);
+    		
+		}else if(tipo=="Soporte"){
 				
-			}
-		}
+				//Blindaje y camuflaje
+				int blindaje=0;
+				int camuflaje=0;
+				
+				//Blindaje
+				convert<<v_o;
+    			convert>>blindaje;
+    			convert.str("");
+    			convert.clear();
+    	
+    			//Fuerza convert
+    			convert<<f_c;
+    			convert>>camuflaje;
+    			convert.str("");
+    			convert.clear();
+				
+				//Crea un nuevo soldado de soporte
+				s=new S_Soporte(blindaje,camuflaje,nombre,p_vida,p_fuerza,tipo);
+				
+		}//If que valida si es soldado de soporte o asalto
+    
+    	equipo2.push_back(s);
+	}
+	
+	//agarrar el segundo deliminator
+	leer.get();
+	while (!leer.eof()){
+		
+    	getline(leer, tipo, '/');
+    	getline(leer, nombre, '/');
+    	getline(leer, vidas, '/'); 
+    	
+    	//Conversion de vidas a entero
+    	convert<<vidas;
+    	convert>>p_vida;
+    	convert.str("");
+    	convert.clear();
+    	
+    	
+    	getline(leer, ataque, '/');
+    	//Conversion de puntos de ataque a entero
+		convert<<ataque;
+    	convert>>p_fuerza;
+    	convert.str("");
+    	convert.clear();
+  	
+    	getline(leer, v_o, '/');
+    	getline(leer, f_c, '/');
+    	
+    	if(tipo=="Asalto"){
+    		
+    		//Velocidad y fuerza extra
+    		int velocidad=0;
+			int f_extra=0;
+			
+			//Velocidad
+			convert<<v_o;
+    		convert>>velocidad;
+    		convert.str("");
+    		convert.clear();
+    	
+    		//Fuerza convert<<ataque;
+    		convert>>f_c;
+    		convert>>f_extra;
+    		convert.str("");
+    		convert.clear();
+    		
+    		//Crea un nuevo soldado de asalto
+    		s=new S_Asalto(velocidad,f_extra,nombre,p_vida,p_fuerza,tipo);
+    		
+		}else if(tipo=="Soporte"){
+				
+				//Blindaje y camuflaje
+				int blindaje=0;
+				int camuflaje=0;
+				
+				//Blindaje
+				convert<<v_o;
+    			convert>>blindaje;
+    			convert.str("");
+    			convert.clear();
+    	
+    			//Fuerza convert
+    			convert<<f_c;
+    			convert>>camuflaje;
+    			convert.str("");
+    			convert.clear();
+				
+				//Crea un nuevo soldado de soporte
+				s=new S_Soporte(blindaje,camuflaje,nombre,p_vida,p_fuerza,tipo);
+				
+		}//If que valida si es soldado de soporte o asalto
+	}
 		
 		leer.close();
 		

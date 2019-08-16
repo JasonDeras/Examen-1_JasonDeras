@@ -22,7 +22,7 @@ class S_Asalto:public Soldados{
 			f_extra=0;
 		}//Fin del constructor simple
 		
-		S_Asalto(int velocidad,int f_extra,string nombre,int p_vida,int p_fuerza):Soldados(nombre,p_vida,p_fuerza){
+		S_Asalto(int velocidad,int f_extra,string nombre,int p_vida,int p_fuerza,string tipo):Soldados(nombre,p_vida,p_fuerza,"Asalto"){
 			this->velocidad=velocidad;
 			this->f_extra=f_extra;
 		}//Constructor sobrecargado
@@ -42,6 +42,12 @@ class S_Asalto:public Soldados{
 	 	int getF_estra(){
 			return f_extra;
 		}//Get de la fuerza extra
+		
+		void print(){
+			Soldados::print();
+			cout<<"Velocidad: "<<velocidad<<endl;
+			cout<<"Fuerza extra: "<<f_extra<<endl;
+		}//Metodo print
 		
 		~S_Asalto(){
 			

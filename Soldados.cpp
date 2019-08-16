@@ -1,4 +1,5 @@
 #include<string>
+#include<iostream>
 #ifndef SOLDADOS_CPP
 #define SOLDADOS_CPP
 
@@ -11,6 +12,7 @@ class Soldados{
 		string nombre;
 		int p_vida;
 		int p_fuerza;
+		string tipo;
 		
 	protected:
 		
@@ -20,12 +22,14 @@ class Soldados{
 			 nombre="";
 			 p_vida=0;
 			 p_fuerza=0;
+			 tipo="";
 		}//Fin del constructor simple
 		
-		Soldados(string nombre,int p_vida,int p_fuerza){
+		Soldados(string nombre,int p_vida,int p_fuerza,string tipo){
 			this->nombre=nombre;
 			this->p_vida=p_vida;
 			this->p_fuerza=p_fuerza;
+			this->tipo=tipo;
 		}//Constructor sobrecargado
 		
 		void setNombre(string nombre){
@@ -51,6 +55,22 @@ class Soldados{
 		int getP_Fuerza(){
 			return this->p_fuerza;
 		}//Get de los puntos de fuerza
+		
+		void setTipo(string tipo){
+			this->tipo.assign(tipo);
+		}//Set del tipo de soldado
+		
+		string getTipo(){
+			return this->tipo;
+		}//Get del tipo de soldado
+		
+		void print(){
+			
+			cout<<"Nombre: "<<nombre<<endl;
+			cout<<"Puntos de vida: "<<p_vida<<endl;
+			cout<<"punto de fuerza: "<<p_fuerza<<endl;
+			cout<<"Tipo: "<<tipo<<endl;
+		}//Metodo print
 		
 		~Soldados(){
 			

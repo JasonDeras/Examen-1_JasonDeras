@@ -22,7 +22,7 @@ class S_Soporte:public Soldados{
 			camuflaje=0;
 		}//Fin del constructor simple
 		
-		S_Soporte(int blindaje,int camuflaje,string nombre,int p_vida,int p_fuerza):Soldados(nombre,p_vida,p_fuerza){
+		S_Soporte(int blindaje,int camuflaje,string nombre,int p_vida,int p_fuerza,string tipo):Soldados(nombre,p_vida,p_fuerza,"Soporte"){
 			this->blindaje=blindaje;
 			this->camuflaje=camuflaje;
 		}//Constructor sobrecargado
@@ -42,6 +42,12 @@ class S_Soporte:public Soldados{
 	 	int getCamuflaje(){
 			return camuflaje;
 		}//Get del Camuflaje
+		
+		void print(){
+			Soldados::print();
+			cout<<"Blindaje: "<<blindaje<<endl;
+			cout<<"Camuflaje: "<<camuflaje<<endl;
+		}//Metodo print
 		
 		~S_Soporte(){
 			
