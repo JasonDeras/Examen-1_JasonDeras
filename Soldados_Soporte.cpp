@@ -43,6 +43,10 @@ class S_Soporte:public Soldados{
 			return camuflaje;
 		}//Get del Camuflaje
 		
+		int ataque(string tipo1,string tipo2){
+		 	return 0;
+		}//Metodo de ataque y defensa
+		
 		void print(){
 			Soldados::print();
 			cout<<"Blindaje: "<<blindaje<<endl;

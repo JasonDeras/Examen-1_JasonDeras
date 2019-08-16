@@ -64,12 +64,16 @@ class Soldados{
 			return this->tipo;
 		}//Get del tipo de soldado
 		
+		virtual int ataque(string tipo1,string tipo2)=0;
+		
+		
 		void print(){
 			
 			cout<<"Nombre: "<<nombre<<endl;
 			cout<<"Puntos de vida: "<<p_vida<<endl;
 			cout<<"punto de fuerza: "<<p_fuerza<<endl;
 			cout<<"Tipo: "<<tipo<<endl;
+			
 		}//Metodo print
 		
 		~Soldados(){

@@ -2,9 +2,16 @@
 #include <fstream>
 #include <string.h>
 #include <vector>
+#include<typeinfo>
 #include<bits/stdc++.h>
+
+#include <stdlib.h>
+#include <time.h>
+
 #include "Soldados_Asalto.cpp"
 #include "Soldados_Soporte.cpp"
+#include "Soldados.cpp"
+
 using namespace std;
 
 string token(string, string,int);
@@ -12,12 +19,12 @@ int ataque(Soldados*s1,Soldados*s2);
 void listar();
 vector<Soldados*>equipo1;
 vector<Soldados*>equipo2;
-Soldados *s1,*s2;
 
 	int main(){
 		
 		int r=1;
 		int op;
+		int ran1,ran2;
 		
 		while(r==1){
 			
@@ -41,6 +48,18 @@ Soldados *s1,*s2;
 				
 				case 2:
 					
+					while(equipo1.size()>0&&equipo2.size()>0){
+						
+						ran1=1+rand()% (equipo1.size());
+						ran2=1+rand()% (equipo2.size());
+						
+						equipo1.at(ran1)->getTipo();
+						equipo2.at(ran2)->getTipo();
+						
+						
+						
+					}//Fin del while que hace la simulacion
+						
 				break;
 				
 				case 3:
@@ -85,8 +104,8 @@ Soldados *s1,*s2;
 	
 	
 	//Soldados de asalto
-		int velocidad;
-		int f_extra;
+	int velocidad;
+	int f_extra;
 		
 	//con dos delimitadores
 	while (leer.get() != '&'){
@@ -218,7 +237,7 @@ Soldados *s1,*s2;
     			convert.str("");
     			convert.clear();
     	
-    			//Fuerza convert
+    			//Camuflaje
     			convert<<f_c;
     			convert>>camuflaje;
     			convert.str("");
@@ -227,8 +246,9 @@ Soldados *s1,*s2;
 				//Crea un nuevo soldado de soporte
 				s=new S_Soporte(blindaje,camuflaje,nombre,p_vida,p_fuerza,tipo);
 				
-		}//If que valida si es soldado de soporte o asalto
-	}
+			}//If que valida si es soldado de soporte o asalto
+			equipo1.push_back(s);
+		}
 		
 		leer.close();
 		

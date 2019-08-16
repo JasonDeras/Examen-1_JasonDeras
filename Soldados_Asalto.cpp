@@ -43,6 +43,10 @@ class S_Asalto:public Soldados{
 			return f_extra;
 		}//Get de la fuerza extra
 		
+		int ataque(string tipo1 ,string tipo2){
+		 	return 0;
+		}//Metodo abstracto para el ataque y la defensa
+		
 		void print(){
 			Soldados::print();
 			cout<<"Velocidad: "<<velocidad<<endl;
